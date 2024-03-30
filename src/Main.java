@@ -1,0 +1,41 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (String i : new Data().getDirs()) {
+            if (new File(i).mkdir()) {
+                stringBuilder.append("Директория " + i + " создана" + "\n");
+            } else {
+                stringBuilder.append("Директорию " + i + " создать не удалось" + "\n");
+            }
+        }
+
+        try {
+            for (String i : new Data().getFiles()) {
+                if (new File(i).createNewFile()) {
+                    stringBuilder.append("Файл " + i + " создан" + "\n");
+                } else {
+                    stringBuilder.append("Не удалось создать файл " + i + "\n");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter(new File("C://Games//temp//temp.txt"));
+
+            for (char i : stringBuilder.toString().toCharArray()) {
+                fileWriter.write(i);
+            }
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
