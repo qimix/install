@@ -52,10 +52,12 @@ public class Main {
     }
 
     public static void writeLog(String logPath){
-        try(FileWriter fileWriter = new FileWriter(new File(logPath))) {
-            fileWriter.write(stringBuilder.toString().toCharArray());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        if(new File(new File(logPath).getParent()).exists()) {
+            try (FileWriter fileWriter = new FileWriter(logPath)) {
+                fileWriter.write(stringBuilder.toString().toCharArray());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
