@@ -3,9 +3,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        StringBuilder stringBuilder = new StringBuilder();
+    static StringBuilder stringBuilder = new StringBuilder();
 
+    public static void main(String[] args) {
+        makeDir();
+
+        try {
+            FileWriter fileWriter = new FileWriter(new File("C://Games//temp//temp.txt"));
+
+            for (char i : stringBuilder.toString().toCharArray()) {
+                fileWriter.write(i);
+            }
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void makeDir(){
         for (String i : new Data().getDirs()) {
             if (new File(i).mkdir()) {
                 stringBuilder.append("Директория " + i + " создана" + "\n");
@@ -25,17 +41,7 @@ public class Main {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
-        try {
-            FileWriter fileWriter = new FileWriter(new File("C://Games//temp//temp.txt"));
-
-            for (char i : stringBuilder.toString().toCharArray()) {
-                fileWriter.write(i);
-            }
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
     }
+
+
 }
