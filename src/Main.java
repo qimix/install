@@ -7,18 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         makeDir();
-
-        try {
-            FileWriter fileWriter = new FileWriter(new File("C://Games//temp//temp.txt"));
-
-            for (char i : stringBuilder.toString().toCharArray()) {
-                fileWriter.write(i);
-            }
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        writeLog();
     }
 
     public static void makeDir(){
@@ -38,6 +27,20 @@ public class Main {
                     stringBuilder.append("Не удалось создать файл " + i + "\n");
                 }
             }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void writeLog(){
+        try {
+            FileWriter fileWriter = new FileWriter(new File("C://Games//temp//temp.txt"));
+
+            for (char i : stringBuilder.toString().toCharArray()) {
+                fileWriter.write(i);
+            }
+            fileWriter.flush();
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
