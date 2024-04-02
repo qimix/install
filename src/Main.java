@@ -33,14 +33,8 @@ public class Main {
     }
 
     public static void writeLog(){
-        try {
-            FileWriter fileWriter = new FileWriter(new File("C://Games//temp//temp.txt"));
-
-            for (char i : stringBuilder.toString().toCharArray()) {
-                fileWriter.write(i);
-            }
-            fileWriter.flush();
-            fileWriter.close();
+        try(FileWriter fileWriter = new FileWriter(new File("C://Games//temp//temp.txt"))) {
+            fileWriter.write(stringBuilder.toString().toCharArray());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
