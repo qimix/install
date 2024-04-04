@@ -9,50 +9,55 @@ public class Main {
 
     public static void main(String[] args) {
         List<String> dirs = new ArrayList<String>();
-                dirs.add("C://Games");
-                dirs.add("C://Games//src");
-                dirs.add("C://Games//res");
-                dirs.add("C://Games//savegames");
-                dirs.add("C://Games//temp");
-                dirs.add("C://Games//src//main");
-                dirs.add("C://Games//src//test");
-                dirs.add("C://Games//res//drawables");
-                dirs.add("C://Games//res//vectors");
-                dirs.add("C://Games//res//icons");
+        dirs.add("C://Games");
+        dirs.add("C://Games//src");
+        dirs.add("C://Games//res");
+        dirs.add("C://Games//savegames");
+        dirs.add("C://Games//temp");
+        dirs.add("C://Games//src//main");
+        dirs.add("C://Games//src//test");
+        dirs.add("C://Games//res//drawables");
+        dirs.add("C://Games//res//vectors");
+        dirs.add("C://Games//res//icons");
 
         List<String> files = new ArrayList<String>();
-                files.add("C://Games//src//main//Main.java");
-                files.add("C://Games//src//main//Utils.java");
-                files.add("C://Games//temp//temp.txt");
+        files.add("C://Games//src//main//Main.java");
+        files.add("C://Games//src//main//Utils.java");
+        files.add("C://Games//temp//temp.txt");
 
-        makeDir(dirs, files);
+        for (String i : dirs) {
+            makeDir(i);
+        }
+
+        for (String i : files) {
+            makeFiles(i);
+        }
+
         writeLog("C://Games//temp//temp.txt");
     }
 
-    public static void makeDir(List<String> dirs,List<String> files){
-        for (String i : dirs) {
-            if (new File(i).mkdir()) {
-                stringBuilder.append("Директория " + i + " создана" + "\n");
-            } else {
-                stringBuilder.append("Директорию " + i + " создать не удалось" + "\n");
-            }
+    public static void makeDir(String dir) {
+        if (new File(dir).mkdir()) {
+            stringBuilder.append("Директория " + dir + " создана" + "\n");
+        } else {
+            stringBuilder.append("Директорию " + dir + " создать не удалось" + "\n");
         }
+    }
 
+    static void makeFiles(String file) {
         try {
-            for (String i : files) {
-                if (new File(i).createNewFile()) {
-                    stringBuilder.append("Файл " + i + " создан" + "\n");
-                } else {
-                    stringBuilder.append("Не удалось создать файл " + i + "\n");
-                }
+            if (new File(file).createNewFile()) {
+                stringBuilder.append("Файл " + file + " создан" + "\n");
+            } else {
+                stringBuilder.append("Не удалось создать файл " + file + "\n");
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void writeLog(String logPath){
-        if(new File(new File(logPath).getParent()).exists()) {
+    public static void writeLog(String logPath) {
+        if (new File(new File(logPath).getParent()).exists()) {
             try (FileWriter fileWriter = new FileWriter(logPath)) {
                 fileWriter.write(stringBuilder.toString().toCharArray());
             } catch (IOException e) {
@@ -60,6 +65,4 @@ public class Main {
             }
         }
     }
-
-
 }
